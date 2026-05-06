@@ -23,27 +23,10 @@
 <script>
   (function () {
     var target = "sellforme://callback" + window.location.search;
-    var manual = document.getElementById("manual");
-    manual.href = target;
-
-    // Strategy 1: meta refresh (lets the WebKit policy decision fire)
-    var meta = document.createElement("meta");
-    meta.httpEquiv = "refresh";
-    meta.content = "0;url=" + target;
-    document.head.appendChild(meta);
-
-    // Strategy 2: location.replace
-    try { window.location.replace(target); } catch (e) {}
-
-    // Strategy 3: programmatic anchor click
-    setTimeout(function () {
-      try { manual.click(); } catch (e) {}
-    }, 100);
-
-    // Strategy 4: fallback location.href
-    setTimeout(function () {
-      try { window.location.href = target; } catch (e) {}
-    }, 400);
+    document.getElementById("manual").href = target;
+    // Single redirect — multiple navigations can cause ASWebAuthenticationSession
+    // to fire its completion handler twice, crashing the iOS continuation.
+    window.location.replace(target);
   })();
 </script>
 </body>
