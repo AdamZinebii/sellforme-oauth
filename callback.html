@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Connecting to SellForMe…</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; display: grid; place-items: center; min-height: 80vh; margin: 0; color: #222; }
+  .card { text-align: center; padding: 24px; }
+  .spinner { width: 28px; height: 28px; border: 3px solid #ddd; border-top-color: #0066cc; border-radius: 50%; animation: spin 0.9s linear infinite; margin: 0 auto 16px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  a { color: #0066cc; }
+</style>
+
+<div class="card">
+  <div class="spinner"></div>
+  <p>Returning to SellForMe…</p>
+  <p><small>If nothing happens, <a id="manual" href="#">tap here</a>.</small></p>
+</div>
+
+<script>
+  // Forward eBay's auth response (?code=... &state=...) to the iOS app
+  var target = "sellforme://callback" + window.location.search;
+  document.getElementById("manual").href = target;
+  window.location.replace(target);
+</script>

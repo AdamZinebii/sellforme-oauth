@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Sign-in cancelled</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; display: grid; place-items: center; min-height: 80vh; margin: 0; color: #222; }
+  .card { text-align: center; padding: 24px; }
+  a { color: #0066cc; }
+</style>
+
+<div class="card">
+  <p>Sign-in cancelled. Returning to SellForMe…</p>
+  <p><small>If nothing happens, <a id="manual" href="#">tap here</a>.</small></p>
+</div>
+
+<script>
+  var target = "sellforme://declined" + window.location.search;
+  document.getElementById("manual").href = target;
+  window.location.replace(target);
+</script>
